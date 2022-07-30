@@ -136,3 +136,11 @@ while True:
         
 player_name = Player(input("What is your name?"))
 player_name.hit()
+
+bet = int(input("""
+    How much would you like to bet?:
+    1. $10
+    2. $100
+    3. $1000
+    4. $5000
+    5. $10000 """))
