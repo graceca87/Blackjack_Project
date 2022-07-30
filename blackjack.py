@@ -144,3 +144,179 @@ bet = int(input("""
     3. $1000
     4. $5000
     5. $10000 """))
+
+
+
+
+import random
+
+
+class Card():
+
+    def __init__(self, num_value, suit):  #creating each card with it's own instance
+        self.suit = suit
+        self.num_value = num_value
+        name = num_value
+        if num_value == 1:
+            name = "Ace"
+        if num_value == 11:
+            name = "Jack"
+        if num_value == 12:
+            name = "Queen"
+        if num_value == 13:
+            name = "King"
+        self.name = f"{name} of {suit}"
+
+        # Now that I've made the deck, I need to change the value for the face cards back to 10
+        
+class Deck():
+    cards = []
+
+    def generate_deck(self):
+        suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+        for suit in suits:
+            for i in range(13):
+                num_value = i + 1                   #need to add 1 because the range starts at index 0
+                card = Card(num_value, suit)
+                self.cards.append(card)             #adding each instance of card to the deck (list) of cards
+
+
+    def deal_card(self):
+        card = random.choice(self.cards)
+        # here I need to remove the random card chosen from the cards list
+        # need to create a variable for the chosen card
+        return card
+            
+
+
+my_deck = Deck()
+my_deck.generate_deck()
+
+class Dealer(Player):
+    hand = []
+
+    def __init__(self, dealer_name):
+        self.dealer_name = dealer_name
+        names = ["Jasper", "Candy", "Billy Bob", "Clarence", "Barb", "Montgomery", "Sam", "Mabel"]
+        dealer_name = random.choice(names)
+
+dealer = Dealer(dealer_name)
+
+
+class Player():
+    
+
+    def __init__(self, name):
+        self.name = name
+        self.hand = []   #when a player is dealt a card it should go into their "hand" list.
+
+    def hit(self, deck):
+        card = deck.deal_card()
+        self.hand.append(card)
+        
+        
+    def show_hand(self):
+        for card in self.hand:
+            if card:
+                print(card.name)
+        return f"-------------"
+
+    def sum_of_hand(self):
+        total = 0
+        for card in self.hand:
+            score = card.num_value
+            if score > 10:
+                score = 10
+            total += score
+        return total
+            
+
+    # def stand(self):
+    #     pass
+
+    # def choose_ace_value(self):
+    #     pass
+
+
+# player_name = input("Player 1 - What is your name?")
+# player = Player(player_name)
+# player.hit(my_deck)
+# player.hit(my_deck)
+# print(f"{player.name} - Here's your hand:")
+# print(player.show_hand())
+# print("the sum of your cards is:")
+# print(player.sum_of_hand())
+
+
+#         deal_card() #if hit is selected initiate the deal card function to generate a new card. 
+#         print(sum(hand))  #return the sum of the new card and the existing card(s)
+
+# player_name = input("Player 2 - What is your name? ")
+# clear_output()
+# player2 = Player(player_name)
+# player2.hit(my_deck)
+# player2.hit(my_deck)
+# print(f"{player2.name} - Here's your hand: ")
+# print(player2.show_hand())
+# print("the sum of your cards is: ")
+# print(player2.sum_of_hand())
+
+
+# print(f"the sum of {player.name}'s cards is: ")
+# print(player.sum_of_hand())
+
+# This is the Brains of the operation:
+class Game():
+
+    def __init__(self):
+        self.dealer = dealer
+        self.player = player
+
+    def start(self):
+        print(f"""
+            Thanks for joining! The game is Blackjack.
+            Your dealer today will be {dealer.dealer_name}""")
+        player = Player(input("Please tell us your name"))
+        print(f"Nice to meet you, {player.name}!")
+        bet_answer = input(f"Would you like to place a bet? Y/n ")
+        if bet_answer == "y".lower:
+            bet = int(input("Great! How much would you like to put down? $"))
+        print(f" Woah big spender! Let's get started...")
+
+        player.hit(my_deck)
+        player.hit(my_deck)
+        print(f"{player.name} - Here's your hand:")
+        print(player.show_hand())
+        print("the sum of your cards is:")
+        print(player.sum_of_hand())
+
+game = Game
+game.start()
+
+while True:
+    to_do = int(input(f"""
+    What would you like to do, {player.name}? 
+    Your choices are: 
+    1. Hit 
+    2. Stand
+    3. Show hand
+    3. Quit
+    """))
+
+    if to_do == 1:
+        player.hit(my_deck)
+
+    if to_do == 3:
+        player.show_hand()
+
+    if to_do == 3:
+        break
+
+
+if player.sum_of_hand() > player2.sum_of_hand():
+    print(f"{player.name} wins! : )")
+elif player.sum_of_hand() == player2.sum_of_hand():
+    print(f"It's a draw. : ( Better luck next time!")
+else:
+    print(f"{player2.name} wins! : )")
+
