@@ -320,3 +320,191 @@ elif player.sum_of_hand() == player2.sum_of_hand():
 else:
     print(f"{player2.name} wins! : )")
 
+
+
+class Game():
+
+    def __init__(self):
+       self.game_number = game_number
+
+    def start(self):
+        print(f"""
+        Thanks for joining! The game is Blackjack.
+            Your dealer today will be {dealer.name}.""")
+        print(f"""          _____
+                |A .  | _____
+                | /.\ ||A ^  | _____
+                |(_._)|| / \ ||A _  | _____
+                |  |  || \ / || ( ) ||A_ _ |
+                |____V||  .  ||(_'_)||( v )|
+                        |____V||  |  || \ / |
+                            |____V||  .  |
+                                    |____V|""")
+        player = Player(input("Please tell us your name "))
+
+        clear_output(wait=True)
+
+        print(f"""{dealer.name} says,
+
+        '{player.name.title()} was my mother's name! And a lovely name it is. 
+
+        ..... Let's get started, shall we? 
+            
+                    Good luck!'
+        """)
+        # bet_answer = input(f"Would you like to place a bet? Y/n ")
+        # if bet_answer == "y".lower:
+        #     player.bet()
+        print(f"{dealer.name} dealt you two cards: ")
+        print("*************************")
+        player.hit(my_deck)
+        player.hit(my_deck)
+        print("*************************")
+        print(f"\n{dealer.name} has a: ")
+        dealer.hit(my_deck)
+        
+
+    def play_again(self):
+        play_again = input(f"Would you like to play again? Y/n")
+        if play_again == "y".lower():
+            start()
+        else:
+            print(f"Thanks for playing {player.name}! Don't let the door hit ya in the you know what!")
+
+
+# new_game = Game(dealer.name, player.name)
+# new_game.start()
+
+while True:
+                                #having some issues with number responses acting funny, especially with stand 
+    to_do = int(input(f"""
+    It's your move, {player.name.titl()}. What would you like to do?    
+    Your choices are: 
+    1. Hit 
+    2. Stand
+    3. Show hand
+    4. Add up hand
+    5. Quit
+    """))
+
+    if to_do not in (1,2,3,4,5):
+        print("Sorry, that's not a valid response. Please type a number to represent your choice. For example, type '1' if you want to hit or '2' if you want to stand.")
+
+    # Player hits:
+    elif to_do == 1:
+        print(f"\n{dealer.name} deals you another card:")
+        player.hit(my_deck)
+        
+        if player.sum_of_hand() == 21:
+            print(f"\nYou have a Blackjack! You win!")
+
+        elif player.sum_of_hand() > 21:
+            print(f"Your cards add up to {player.sum_of_hand()}")
+            print(f"\nSorry, you bust! : ( {dealer.name} wins the round")
+            play_again()
+
+    if to_do == 2:
+        player.stand()
+
+        if dealer.sum_of_hand() <= 17:
+            dealer.hit(my_deck)
+
+        elif dealer.sum_of_hand() == 21:
+            print(f"\n{dealer.name} has a Blackjack and wins the round!")
+
+        elif dealer.sum_of_hand() > 21:
+            print(f"\n{dealer.name} busts and the round is over")
+            break
+
+        elif player.sum_of_hand() == 21:
+            print(f"\nYou have a Blackjack! You win!")
+
+        elif player.sum_of_hand() > 21:
+            print(f"\nSorry, you bust. {dealer.name} wins the round")
+
+        elif dealer.sum_of_hand() >= 17 and dealer.sum_of_hand() > player.sum_of_hand():
+            print(f"""
+            {dealer.name} has won this round.
+            Better luck next time!""")
+
+        elif dealer.sum_of_hand() == player.sum_of_hand(): 
+            print(f"\nIt's a draw!")
+
+        else:
+            print(f"""
+            Winner Winner Chicken Dinner!!
+            {player.name}, you win! 
+                    : )
+            """)
+    # Player can look at all the cards in their hand
+    elif to_do == 3:
+        print(f"""
+        *********************
+        {player.show_hand()}
+        *********************
+        """)
+    # Calculates current total of cards in player's hand
+    elif to_do == 4:
+        print(f"Your cards add up to {player.sum_of_hand()}")
+
+    # To Quit
+    elif to_do == 5:
+        print("Thanks for playing! See you next time.")
+        break
+
+    
+
+    # class Game():
+
+#     def __init__(self, game_number):
+#        self.game_number = game_number
+
+    # def play_again(self):
+    #     play_again = input(f"Would you like to play again? Y/n")
+    #     if play_again == "y".lower():
+    #         player.start()
+    #     else:
+    #         print(f"Thanks for playing {player.name}! Don't let the door hit ya in the you know what!")
+
+    # def start(self):
+    #     print(f"""
+    #     Thanks for joining! The game is Blackjack.
+    #         Your dealer today will be {dealer.name}.""")
+    #     print(f"""   
+    #          _____
+    #         |A .  | _____
+    #         | /.\ ||Q ^  | _____
+    #         |(_._)|| / \ ||K _  | _____
+    #         |  |  || \ / || ( ) ||J_ _ |
+    #         |____V||  .  ||(_'_)||( v )|
+    #                |____V||  |  || \ / |
+    #                       |____V||  .  |
+    #                              |____V| 
+                                    
+    #                                      """)
+    #     player = Player(input("Please tell us your name "))
+
+    #     clear_output(wait=True)
+
+    #     print(f"""{dealer.name} says,
+
+    #     '{player.name.title()} was my mother's name! And a lovely name it is. 
+
+    #     ..... Let's get started, shall we? 
+            
+    #                 Good luck!'
+    #     """)
+    #     # bet_answer = input(f"Would you like to place a bet? Y/n ")
+    #     # if bet_answer == "y".lower:
+    #     #     player.bet()
+    #     print(f"{dealer.name} dealt you two cards: ")
+    #     print("*************************")
+    #     player.hit(my_deck)
+    #     player.hit(my_deck)
+    #     print("*************************")
+    #     print(f"\n{dealer.name} has a: ")
+    #     dealer.hit(my_deck)
+        
+
+# game = Game(1)
+# game.start()
